@@ -15,6 +15,7 @@ Requirements
 - Extension methods to convert DataTable to ToList&lt;T&gt; (Extensions.cs and Extensions.vb are located in /source/extensions)
 
 Instructions
+- Use the Download ZIP button from the sql-code-gen repository to download the full set of files
 - Copy the scripts to your local drive
 - Open SQL Server Management Studio
 - Connect to your SQL server
