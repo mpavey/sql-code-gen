@@ -12,6 +12,7 @@ Please keep in mind these scripts were written for a specific style of n-tier ar
 Requirements
 - Microsoft SQL Server (2008, 2012, 2014)
 - Microsoft Enterprise Library Data Access Application Block (5.0, 6.0)
+- Extension methods to convert DataTable to ToList&lt;T&gt; (Extensions.cs and Extensions.vb are located in /source/extensions)
 
 Instructions
 - Copy the scripts to your local drive
