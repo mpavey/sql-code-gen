@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="extensions\Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -54,6 +56,7 @@
     <Content Include="data\vb\save.sql" />
     <Content Include="data\vb\shell-end.sql" />
     <Content Include="data\vb\shell-start.sql" />
+    <Content Include="extensions\Extensions.vb" />
     <Content Include="model\cs\model-proc.sql" />
     <Content Include="model\cs\model-table.sql" />
     <Content Include="model\vb\model-table.sql" />
@@ -62,6 +65,7 @@
     <Content Include="procs\save.sql" />
     <Content Include="sqlcmd.sql" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
