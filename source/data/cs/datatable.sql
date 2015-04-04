@@ -2,8 +2,9 @@
 SET NOCOUNT ON;
 
 -- input variables
-DECLARE @StoredProcedure	VARCHAR(MAX)	= 'Fertilizers_List'	-- required
-DECLARE @EnterpriseLibrary	VARCHAR(10)		= '5'					-- optional; 5 (default); 6
+DECLARE @Schema				VARCHAR(50)		= 'dbo'				-- required
+DECLARE @StoredProcedure	VARCHAR(MAX)	= 'Fields_List'		-- required
+DECLARE @EnterpriseLibrary	VARCHAR(10)		= '5'				-- optional; 5 (default); 6
 
 -- cursor variables
 DECLARE @Property	VARCHAR(50)	= ''
@@ -119,7 +120,7 @@ END
 PRINT '	DataTable DT = new DataTable();'
 PRINT ''
 PRINT '	// command'
-PRINT '	using (DbCommand cmd = DB.GetStoredProcCommand("' + @StoredProcedure + '"))'
+PRINT '	using (DbCommand cmd = DB.GetStoredProcCommand("' + @Schema + '.' + @StoredProcedure + '"))'
 PRINT '	{'
 PRINT '		// parameters'
 

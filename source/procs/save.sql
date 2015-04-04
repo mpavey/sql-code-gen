@@ -5,6 +5,7 @@ SET NOCOUNT ON;
 -- input variables are defined in sqlcmd.sql file
 
 -- input variables
+DECLARE @Schema			VARCHAR(50)		= '$(Schema)'			-- required
 DECLARE @ProcBaseName	VARCHAR(50)		= '$(ProcBaseName)'		-- required
 DECLARE @TableName		VARCHAR(50)		= '$(TableName)'		-- required
 
@@ -37,7 +38,7 @@ WHERE	o.type = 'U'
 AND		o.name = @TableName
 
 -- create procedure
-PRINT 'CREATE PROCEDURE [dbo].[' + @ProcBaseName + '_Save]'
+PRINT 'CREATE PROCEDURE [' + @Schema + '].[' + @ProcBaseName + '_Save]'
 PRINT '('
 
 -- input parameters

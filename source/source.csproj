@@ -59,6 +59,7 @@
     <Content Include="extensions\Extensions.vb" />
     <Content Include="model\cs\model-proc.sql" />
     <Content Include="model\cs\model-table.sql" />
+    <Content Include="model\vb\model-proc.sql" />
     <Content Include="model\vb\model-table.sql" />
     <Content Include="procs\delete.sql" />
     <Content Include="procs\list.sql" />

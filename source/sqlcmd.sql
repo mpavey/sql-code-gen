@@ -1,46 +1,111 @@
--- variables
-:setvar path "C:\Users\matt\Dropbox\scripts\codegen\v3.0"
+/*
+--------------------------------------------------
+REQUIRED SETTINGS
+--------------------------------------------------
+*/
+
+-- the local path that you extracted the the sql-code-gen scripts to
+-- this is the path where the sqlcmd.sql file is located
+:setvar scriptspath "C:\Users\matt\Dropbox\projects\sql-code-gen\source"
+
+-- the programming language for the model classes and data classes
+-- supported options are "cs" and "vb"
 :setvar language "cs"
-:setvar output "C:\Users\matt\Desktop\temp"
 
-:setvar TableName "Fields"			-- required (the name of the table you are generating code for)
-:setvar ProcBaseName "Fields"		-- required (base name for stored procedures, e.g. Entity_List, Entity_Save, Entity_Delete)
-:setvar ClassNameModel "Field"		-- required (the name of the model class)
-:setvar ClassNameData "Fields"		-- required (the name of the data class)
-:setvar AssemblyName "Model"		-- required (the name of the namespace where the model classes are stored within the project)
+-- the local path where you want the output files created
+-- if output folders do not exist they will be created
+:setvar outputpath "C:\Users\matt\Desktop\temp\codegen"
 
-:setvar IncludeUsing 0				-- optional (indicates whether or not to include import/using statements for model class)
-:setvar Namespace "Sandbox"			-- optional (the namespace of the project)
-:setvar BaseClassModel ""			-- optional (the name of the base class for the model class)
-:setvar BaseClassData ""			-- optional (the name of the base class for the data class)
-:setvar FilterAll 0					-- optional (indicates if list stored procedure should have optional filters for all fields, or just primary key)
-:setvar EnterpriseLibrary "5"		-- optional (the version of the enterprise library data access application blocks, e.g. 5 or 6)
+-- the database schema
+-- Recommended: dbo, but this depends on your database design and requirements
+:setvar Schema "dbo"
+
+-- the name of the table you are generating code for
+:setvar TableName "Fields"
+
+-- base name for stored procedures, e.g. Entity_List, Entity_Save, Entity_Delete
+-- Recommended: Typically the same as the TableName
+:setvar ProcBaseName "Fields"
+
+-- the name of the model class
+-- Recommended: Typically the singular version of the TableName
+:setvar ClassNameModel "Field"
+
+-- the name of the data class
+-- Recommended: Typically the same as the TableName
+:setvar ClassNameData "Fields"
+
+-- the namespace name of the model layer project
+-- Recommended: Model
+:setvar AssemblyName "Model"
+
+/*
+--------------------------------------------------
+OPTIONAL SETTINGS
+--------------------------------------------------
+*/
+
+-- indicates whether or not to include import/using statements for model class
+-- Recommended: 0
+:setvar IncludeUsing 0
+
+-- the namespace of the project
+-- Recommended: This value should be set specific to your project
+:setvar Namespace "Sandbox"
+
+-- the name of the base class for the model class
+-- Recommended: This value is only required if your model classes derive from a base class
+:setvar BaseClassModel ""
+
+-- the name of the base class for the data class
+-- Recommended: This value is only required if your data classes derive from a base class
+:setvar BaseClassData ""
+
+-- indicates if list stored procedure should have optional filters for all fields, or just primary key
+-- Recommended: 0 (set to 1 if you want all fields in list stored procedure to have optional filters)
+:setvar FilterAll 0
+
+-- the version of the enterprise library data access application blocks
+-- Recommended: 5 (default) or 6, this simply determines how the Database DB variable is initialized
+:setvar EnterpriseLibrary "5"
+
+/*
+--------------------------------------------------
+DO NOT MODIFY VALUES BELOW THIS COMMENT
+--------------------------------------------------
+*/
+
+-- if output folders do not exist, create them
+:!! if not exist $(outputpath) mkdir $(outputpath)
+:!! if not exist $(outputpath)\model mkdir $(outputpath)\model
+:!! if not exist $(outputpath)\data mkdir $(outputpath)\data
+:!! if not exist $(outputpath)\sql mkdir $(outputpath)\sql
 
 -- model
-:out $(output)\model"."$(language)
-:r $(path)\model"\"$(language)\model-table.sql
+:out $(outputpath)"\model\"$(ClassNameModel)"."$(language)
+:r $(scriptspath)\model"\"$(language)\model-table.sql
 
 -- procs
-:out $(output)\procs.sql
-:r $(path)\procs\list.sql
-:r $(path)\procs\save.sql
-:r $(path)\procs\delete.sql
+:out $(outputpath)\sql\procs.sql
+:r $(scriptspath)\procs\list.sql
+:r $(scriptspath)\procs\save.sql
+:r $(scriptspath)\procs\delete.sql
 
--- data layer
-:out $(output)\data"."$(language)
-:r $(path)\data"\"$(language)\shell-start.sql
-:r $(path)\data"\"$(language)\list.sql
-:r $(path)\data"\"$(language)\save.sql
-:r $(path)\data"\"$(language)\delete.sql
-:r $(path)\data"\"$(language)\shell-end.sql
+-- data
+:out $(outputpath)"\data\"$(ClassNameData)"."$(language)
+:r $(scriptspath)\data"\"$(language)\shell-start.sql
+:r $(scriptspath)\data"\"$(language)\list.sql
+:r $(scriptspath)\data"\"$(language)\save.sql
+:r $(scriptspath)\data"\"$(language)\delete.sql
+:r $(scriptspath)\data"\"$(language)\shell-end.sql
 
 -- debug
 :out stdout
-!! ECHO $(output)
-!! ECHO $(output)\procs.sql
-!! ECHO $(output)\model.$(language)
-!! ECHO $(output)\data.$(language)
---!! ECHO $(path)
+!! ECHO $(outputpath)\sql\procs.sql
+!! ECHO $(outputpath)\model\$(ClassNameModel).$(language)
+!! ECHO $(outputpath)\data\$(ClassNameData).$(language)
+
+--!! ECHO $(scriptspath)
 --!! ECHO $(language)
---!! ECHO $(path)\step-01-model\$(language)
---!! ECHO $(path)\step-01-model\$(language)\model-table.sql
+--!! ECHO $(scriptspath)\step-01-model\$(language)
+--!! ECHO $(scriptspath)\step-01-model\$(language)\model-table.sql

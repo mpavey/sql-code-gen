@@ -5,9 +5,10 @@ SET NOCOUNT ON;
 -- input variables are defined in sqlcmd.sql file
 
 -- input variables
+DECLARE @Schema				VARCHAR(50)		= '$(Schema)'				-- required
 DECLARE @TableName			VARCHAR(50)		= '$(TableName)'			-- required
 DECLARE @StoredProcedure	VARCHAR(50)		= @TableName + '_Delete'	-- required
-DECLARE @EnterpriseLibrary	VARCHAR(10)		= '$(EnterpriseLibrary)'	-- optional; 5 (default); 6
+DECLARE @EnterpriseLibrary	VARCHAR(10)		= '$(EnterpriseLibrary)'	-- optional
 
 -- other variables
 DECLARE @PrimaryKey			VARCHAR(50)	= ''
@@ -33,7 +34,7 @@ END
 PRINT '			Dim ReturnValue As Integer = -1'
 PRINT ''
 PRINT '			''command'
-PRINT '			Using cmd As DbCommand = DB.GetStoredProcCommand("' + @StoredProcedure + '")'
+PRINT '			Using cmd As DbCommand = DB.GetStoredProcCommand("' + @Schema + '.' + @StoredProcedure + '")'
 PRINT '				''parameters'
 PRINT '				DB.AddInParameter(cmd, "@' + @PrimaryKey + '", DbType.Int32, ' + @PrimaryKey + ')'
 PRINT ''

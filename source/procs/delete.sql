@@ -5,6 +5,7 @@ SET NOCOUNT ON;
 -- input variables are defined in sqlcmd.sql file
 
 -- input variables
+DECLARE @Schema			VARCHAR(50)		= '$(Schema)'			-- required
 DECLARE @ProcBaseName	VARCHAR(50)		= '$(ProcBaseName)'		-- required
 DECLARE @TableName		VARCHAR(50)		= '$(TableName)'		-- required
 
@@ -17,7 +18,7 @@ SELECT	TOP 1
 FROM	information_schema.key_column_usage 
 WHERE	TABLE_NAME = @TableName
 
-PRINT 'CREATE PROCEDURE [dbo].[' + @ProcBaseName + '_Delete]'
+PRINT 'CREATE PROCEDURE [' + @Schema +  '].[' + @ProcBaseName + '_Delete]'
 PRINT '('
 PRINT '	@' + @PrimaryKey + '	INT'
 PRINT ')'

@@ -5,9 +5,10 @@ SET NOCOUNT ON;
 -- input variables are defined in sqlcmd.sql file
 
 -- input variables
+DECLARE @Schema				VARCHAR(50)		= '$(Schema)'				-- required
 DECLARE @TableName			VARCHAR(50)		= '$(TableName)'			-- required
 DECLARE @StoredProcedure	VARCHAR(50)		= @TableName + '_List'		-- required
-DECLARE @EnterpriseLibrary	VARCHAR(10)		= '$(EnterpriseLibrary)'	-- optional; 5 (default); 6
+DECLARE @EnterpriseLibrary	VARCHAR(10)		= '$(EnterpriseLibrary)'	-- optional
 DECLARE @AssemblyName		VARCHAR(50)		= '$(AssemblyName)'			-- required
 DECLARE @ClassNameModel		VARCHAR(50)		= '$(ClassNameModel)'		-- required
 
@@ -73,7 +74,7 @@ END
 PRINT '			Dim ReturnValue As Integer = -1'
 PRINT ''
 PRINT '			''command'
-PRINT '			Using cmd As DbCommand = DB.GetStoredProcCommand("' + @StoredProcedure + '")'
+PRINT '			Using cmd As DbCommand = DB.GetStoredProcCommand("' + @Schema + '.' + @StoredProcedure + '")'
 PRINT '				''parameters'
 PRINT '				With ' + @ClassNameModel
 

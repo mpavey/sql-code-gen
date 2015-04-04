@@ -8,7 +8,7 @@ SET NOCOUNT ON;
 DECLARE @TableName		VARCHAR(50)		= '$(TableName)'		-- required
 DECLARE @IncludeUsing	BIT				= $(IncludeUsing)		-- optional
 DECLARE @Namespace		VARCHAR(50)		= '$(Namespace)'		-- optional
-DECLARE @ClassNameModel	VARCHAR(50)	= '$(ClassNameModel)'	-- required
+DECLARE @ClassNameModel	VARCHAR(50)		= '$(ClassNameModel)'	-- required
 DECLARE @BaseClassModel	VARCHAR(50)		= '$(BaseClassModel)'	-- optional
 
 -- cursor variables
