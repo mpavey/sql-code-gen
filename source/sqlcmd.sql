@@ -104,8 +104,3 @@ DO NOT MODIFY VALUES BELOW THIS COMMENT
 !! ECHO $(outputpath)\sql\procs.sql
 !! ECHO $(outputpath)\model\$(ClassNameModel).$(language)
 !! ECHO $(outputpath)\data\$(ClassNameData).$(language)
-
---!! ECHO $(scriptspath)
---!! ECHO $(language)
---!! ECHO $(scriptspath)\step-01-model\$(language)
---!! ECHO $(scriptspath)\step-01-model\$(language)\model-table.sql
