@@ -12,23 +12,22 @@ Please keep in mind these scripts were written for a specific style of n-tier ar
 Requirements
 - Microsoft SQL Server (2008, 2012, 2014)
 - Microsoft Enterprise Library Data Access Application Block (5.0, 6.0)
+- Assumes the table(s) you are generating code for have a single primary key column
 - Extension methods to convert DataTable to ToList&lt;T&gt; (Extensions.cs and Extensions.vb are located in /source/extensions)
 
 Instructions
 - Use the Download ZIP button from the sql-code-gen repository to download the full set of files
-- Copy the scripts to your local drive
+- Extract the scripts from the ZIP file to your local drive
 - Open SQL Server Management Studio
 - Connect to your SQL server
 - Select your database
-- Open sqlcmd.sql (in the root of the source folder)
+- Open the sqlcmd.sql file from where you extracted the scripts
 - Go to the Query menu and choose SQLCMD Mode
-- Set the path to the path where you copied the scripts
-- Set the language to cs or vb depending on what type of files you are generating
-- Set the output folder where you want the output files created
-- Set the required/optional variables as needed for the table you are code-generating
+- Set the REQUIRED SETTINGS as needed
+- Set the OPTIONAL SETTINGS as needed
 
 The scripts will run and create the output files, for example:
 
-- C:\Users\matt\Desktop\temp\procs.sql
-- C:\Users\matt\Desktop\temp\model.cs
-- C:\Users\matt\Desktop\temp\data.cs
+- C:\Users\matt\Desktop\temp\codegen\sql\procs.sql
+- C:\Users\matt\Desktop\temp\codegen\model\model.cs
+- C:\Users\matt\Desktop\temp\codegen\data\data.cs
