@@ -29,10 +29,12 @@ Instructions
 
 The scripts will run and create the output files, for example:
 
+##### C# 
 - [C:\Users\matt\Desktop\temp\codegen\sql\procs.sql](https://github.com/mpavey/sql-code-gen/wiki/Example-SQL-Output)
 - [C:\Users\matt\Desktop\temp\codegen\model\model.cs](https://github.com/mpavey/sql-code-gen/wiki/Example-Model-Class-(C%23))
 - [C:\Users\matt\Desktop\temp\codegen\data\data.cs](https://github.com/mpavey/sql-code-gen/wiki/Example-Data-Class-(C%23))
 
+##### VB.Net
 - [C:\Users\matt\Desktop\temp\codegen\sql\procs.sql](https://github.com/mpavey/sql-code-gen/wiki/Example-SQL-Output)
 - [C:\Users\matt\Desktop\temp\codegen\model\model.vb](https://github.com/mpavey/sql-code-gen/wiki/Example-Model-Class-(VB.Net))
 - [C:\Users\matt\Desktop\temp\codegen\data\data.vb](https://github.com/mpavey/sql-code-gen/wiki/Example-Data-Class-(VB.Net))
