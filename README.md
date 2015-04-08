@@ -17,7 +17,7 @@ Requirements
 
 Instructions
 -----------
-- Use the `Download ZIP` button from the `sql-code-gen` repository to download the full set of files
+- Use the `Download ZIP` button from the `sql-code-gen` repository to [download](https://github.com/mpavey/sql-code-gen/archive/master.zip) the scripts
 - Extract the scripts from the ZIP file to your local drive
 - Open `SQL Server Management Studio`
 - Connect to your SQL server
@@ -29,9 +29,13 @@ Instructions
 
 The scripts will run and create the output files, for example:
 
-- C:\Users\matt\Desktop\temp\codegen\sql\procs.sql
-- C:\Users\matt\Desktop\temp\codegen\model\model.cs
-- C:\Users\matt\Desktop\temp\codegen\data\data.cs
+- [C:\Users\matt\Desktop\temp\codegen\sql\procs.sql](https://github.com/mpavey/sql-code-gen/wiki/Example-SQL-Output)
+- [C:\Users\matt\Desktop\temp\codegen\model\model.cs](https://github.com/mpavey/sql-code-gen/wiki/Example-Model-Class-(C%23))
+- [C:\Users\matt\Desktop\temp\codegen\data\data.cs](https://github.com/mpavey/sql-code-gen/wiki/Example-Data-Class-(C%23))
+
+- [C:\Users\matt\Desktop\temp\codegen\sql\procs.sql](https://github.com/mpavey/sql-code-gen/wiki/Example-SQL-Output)
+- [C:\Users\matt\Desktop\temp\codegen\model\model.vb](https://github.com/mpavey/sql-code-gen/wiki/Example-Model-Class-(VB.Net))
+- [C:\Users\matt\Desktop\temp\codegen\data\data.vb](https://github.com/mpavey/sql-code-gen/wiki/Example-Data-Class-(VB.Net))
 
 Author
 ------------
