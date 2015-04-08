@@ -1,7 +1,5 @@
 # SQL Code Generation Tool
 
-About
------------
 These scripts started in late 2010 when I simply got tired of manually coding VB.net model classes. Over time, I added additional scripts to code gen the basic stored procedures, model classes, and data layer classes that I generally needed for each entity in my project. The stored procedureds are the basic list/save/delete variety. Initially the scripts only generated VB.net code for the model/data layers; however, they now support both `VB.net` and `C#`.
 
 The scripts have went through 3 major rewrites/refactoring to get to their current version (v3.0) and now work with `SQLCMD`, which makes generating your files (procs, model, data) very simple.
