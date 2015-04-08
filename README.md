@@ -10,9 +10,9 @@ These scripts more or less automated 90% of the routine tasks I would encounter 
 
 Requirements
 -----------
-- Microsoft SQL Server (2008, 2012, 2014)
-- Microsoft Enterprise Library Data Access Application Block (5.0, 6.0)
-- Assumes the table(s) you are generating code for have a single primary key column
+- `Microsoft SQL Server` (2008, 2012, 2014)
+- `Microsoft Enterprise Library Data Access Application Block` (5.0, 6.0)
+- Assumes the table(s) you are generating code for have a single `primary key column`
 - Extension methods to convert `DataTable` to `ToList<T>` (`Extensions.cs` and `Extensions.vb` are located in `/source/extensions`)
 
 Instructions
