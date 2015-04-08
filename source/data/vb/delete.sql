@@ -28,7 +28,7 @@ BEGIN
 END
 ELSE
 BEGIN
-	PRINT '			im DB As Database = DatabaseFactory.CreateDatabase()'
+	PRINT '			Dim DB As Database = DatabaseFactory.CreateDatabase()'
 END
 
 PRINT '			Dim ReturnValue As Integer = -1'

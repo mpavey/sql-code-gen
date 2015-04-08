@@ -13,7 +13,6 @@ DECLARE @BaseClassData	VARCHAR(50)		= '$(BaseClassData)'	-- optional
 PRINT 'Imports Microsoft.Practices.EnterpriseLibrary.Data'
 PRINT 'Imports System.Data.Common'
 PRINT 'Imports ' + @Namespace + '.Utilities.Extensions'
-PRINT 'Imports ' + @Namespace + '.Utilities.Functions'
 PRINT ''
 
 -- namespace
