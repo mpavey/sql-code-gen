@@ -7,7 +7,7 @@ SET NOCOUNT ON;
 -- input variables
 DECLARE @Schema				VARCHAR(50)		= '$(Schema)'				-- required
 DECLARE @TableName			VARCHAR(50)		= '$(TableName)'			-- required
-DECLARE @StoredProcedure	VARCHAR(50)		= @TableName + '_List'		-- required
+DECLARE @StoredProcedure	VARCHAR(50)		= @TableName + '_Save'		-- required
 DECLARE @EnterpriseLibrary	VARCHAR(10)		= '$(EnterpriseLibrary)'	-- optional
 DECLARE @AssemblyName		VARCHAR(50)		= '$(AssemblyName)'			-- required
 DECLARE @ClassNameModel		VARCHAR(50)		= '$(ClassNameModel)'		-- required
