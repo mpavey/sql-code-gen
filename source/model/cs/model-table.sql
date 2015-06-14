@@ -5,6 +5,7 @@ SET NOCOUNT ON;
 -- input variables are defined in sqlcmd.sql file
 
 -- input variables
+DECLARE @Schema			VARCHAR(50)		= '$(Schema)'			-- required
 DECLARE @TableName		VARCHAR(50)		= '$(TableName)'		-- required
 DECLARE @IncludeUsing	BIT				= $(IncludeUsing)		-- optional
 DECLARE @Namespace		VARCHAR(50)		= '$(Namespace)'		-- optional
@@ -57,13 +58,15 @@ PRINT '		{'
 -- declare cursor
 DECLARE MyCursor CURSOR LOCAL FAST_FORWARD
 FOR
-	SELECT		'Property' = c.name,
-				'SqlType' = t.name,
-				'Null' = c.is_nullable
+	SELECT		Property = c.name,
+				SqlType = t.name,
+				[Null] = c.is_nullable
 	FROM		sys.columns c
 	JOIN		sys.objects o ON c.object_id = o.object_id
 	JOIN		sys.types t ON c.user_type_id = t.user_type_id
+	JOIN		sys.schemas s ON o.schema_id = s.schema_id
 	WHERE		o.type = 'U'
+	AND			s.name = @Schema
 	AND			o.name = @TableName
 	ORDER BY	c.column_id
 
@@ -132,13 +135,15 @@ PRINT '		// public properties'
 -- declare cursor
 DECLARE MyCursor CURSOR LOCAL FAST_FORWARD
 FOR
-	SELECT		'Property' = c.name,
-				'SqlType' = t.name,
-				'Null' = c.is_nullable
+	SELECT		Property = c.name,
+				SqlType = t.name,
+				[Null] = c.is_nullable
 	FROM		sys.columns c
 	JOIN		sys.objects o ON c.object_id = o.object_id
 	JOIN		sys.types t ON c.user_type_id = t.user_type_id
+	JOIN		sys.schemas s ON o.schema_id = s.schema_id
 	WHERE		o.type = 'U'
+	AND			s.name = @Schema
 	AND			o.name = @TableName
 	ORDER BY	c.column_id
 

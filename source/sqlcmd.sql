@@ -21,19 +21,19 @@ REQUIRED SETTINGS
 :setvar Schema "dbo"
 
 -- the name of the table you are generating code for
-:setvar TableName "Fields"
+:setvar TableName "Users"
 
 -- base name for stored procedures, e.g. Entity_List, Entity_Save, Entity_Delete
 -- Recommended: Typically the same as the TableName
-:setvar ProcBaseName "Fields"
+:setvar ProcBaseName "Users"
 
 -- the name of the model class
 -- Recommended: Typically the singular version of the TableName
-:setvar ClassNameModel "Field"
+:setvar ClassNameModel "User"
 
 -- the name of the data class
 -- Recommended: Typically the same as the TableName
-:setvar ClassNameData "Fields"
+:setvar ClassNameData "Users"
 
 -- the namespace name of the model layer project
 -- Recommended: Model
@@ -51,7 +51,7 @@ OPTIONAL SETTINGS
 
 -- the namespace of the project
 -- Recommended: This value should be set specific to your project
-:setvar Namespace "Sandbox"
+:setvar Namespace "MySafeInfo"
 
 -- the name of the base class for the model class
 -- Recommended: This value is only required if your model classes derive from a base class
@@ -67,7 +67,7 @@ OPTIONAL SETTINGS
 
 -- the version of the enterprise library data access application blocks
 -- Recommended: 5 (default) or 6, this simply determines how the Database DB variable is initialized
-:setvar EnterpriseLibrary "5"
+:setvar EnterpriseLibrary "6"
 
 /*
 --------------------------------------------------

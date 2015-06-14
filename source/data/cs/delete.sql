@@ -17,7 +17,8 @@ DECLARE @PrimaryKey			VARCHAR(50)	= ''
 SELECT	TOP 1
 		@PrimaryKey = COLUMN_NAME
 FROM	INFORMATION_SCHEMA.KEY_COLUMN_USAGE
-WHERE	TABLE_NAME = @TableName
+WHERE	TABLE_SCHEMA = @Schema
+AND		TABLE_NAME = @TableName
 
 PRINT '		public int Delete(int ' + @PrimaryKey + ')'
 PRINT '		{'

@@ -2,11 +2,12 @@
 SET NOCOUNT ON;
 
 -- input variables
-DECLARE @ClassName			VARCHAR(50)		= 'Field'				-- required
-DECLARE @StoredProcedure	VARCHAR(50)		= 'Fields_List'			-- required
-DECLARE @Namespace			VARCHAR(50)		= 'Model.Sandbox'		-- optional
-DECLARE @IncludeUsing		BIT				= 0						-- optional
-DECLARE @BaseClass			VARCHAR(50)		= ''					-- optional
+DECLARE @Schema				VARCHAR(50)		= 'dbo'				-- required
+DECLARE @ClassName			VARCHAR(50)		= 'Field'			-- required
+DECLARE @StoredProcedure	VARCHAR(50)		= 'Fields_List'		-- required
+DECLARE @Namespace			VARCHAR(50)		= 'Model.Sandbox'	-- optional
+DECLARE @IncludeUsing		BIT				= 0					-- optional
+DECLARE @BaseClass			VARCHAR(50)		= ''				-- optional
 
 -- cursor variables
 DECLARE @Property	VARCHAR(50)	= ''
@@ -50,8 +51,8 @@ PRINT '		''public properties'
 -- declare cursor
 DECLARE MyCursor CURSOR LOCAL FAST_FORWARD
 FOR
-	SELECT	'Property' = name,
-			'SqlType' = system_type_name
+	SELECT	Property = name,
+			SqlType = system_type_name
 	FROM	sys.dm_exec_describe_first_result_set(@StoredProcedure, NULL, 1)
 
 -- open cursor

@@ -28,14 +28,17 @@ DECLARE @DefaultValue	VARCHAR(50)	= ''
 SELECT	TOP 1
 		@PrimaryKey = COLUMN_NAME
 FROM	INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
-WHERE	TABLE_NAME = @TableName
+WHERE	TABLE_SCHEMA = @Schema
+AND		TABLE_NAME = @TableName
 
 -- number of columns
 SELECT	@Columns = COUNT(*)
 FROM	sys.columns c
 JOIN	sys.objects o ON c.object_id = o.object_id
 JOIN	sys.types t ON c.user_type_id = t.user_type_id
+JOIN	sys.schemas s ON o.schema_id = s.schema_id
 WHERE	o.type = 'U'
+AND		s.name = @Schema
 AND		o.name = @TableName
 
 -- number of filters
@@ -43,7 +46,9 @@ SELECT	@Filters = COUNT(*)
 FROM	sys.columns c
 JOIN	sys.objects o ON c.object_id = o.object_id
 JOIN	sys.types t ON c.user_type_id = t.user_type_id
+JOIN	sys.schemas s ON o.schema_id = s.schema_id
 WHERE	o.type = 'U'
+AND		s.name = @Schema
 AND		o.name = @TableName
 AND		c.name = 
 			CASE
@@ -58,16 +63,18 @@ PRINT '('
 -- input parameters
 DECLARE MyCursor CURSOR LOCAL FAST_FORWARD
 FOR
-	SELECT		'Property' = c.name,
-				'SqlType' = t.name,
-				'Length' = c.max_length,
-				'Row' = ROW_NUMBER() OVER (ORDER BY c.column_id),
-				'Precision' = c.precision,
-				'Scale' = c.scale
+	SELECT		Property = c.name,
+				SqlType = t.name,
+				Length = c.max_length,
+				Row = ROW_NUMBER() OVER (ORDER BY c.column_id),
+				Precision = c.precision,
+				Scale = c.scale
 	FROM		sys.columns c
 	JOIN		sys.objects o ON c.object_id = o.object_id
 	JOIN		sys.types t ON c.user_type_id = t.user_type_id
+	JOIN		sys.schemas s ON o.schema_id = s.schema_id
 	WHERE		o.type = 'U'
+	AND			s.name = @Schema
 	AND			o.name = @TableName
 	AND			c.name = 
 					CASE
@@ -148,11 +155,13 @@ PRINT '	-- get data'
 -- declare cursor
 DECLARE MyCursor CURSOR LOCAL FAST_FORWARD
 FOR
-	SELECT		'Property' = c.name,
-				'Row' = ROW_NUMBER() OVER (ORDER BY c.column_id)
+	SELECT		Property = c.name,
+				Row = ROW_NUMBER() OVER (ORDER BY c.column_id)
 	FROM		sys.columns c
 	JOIN		sys.objects o ON c.object_id = o.object_id
+	JOIN		sys.schemas s ON o.schema_id = s.schema_id
 	WHERE		o.type = 'U'
+	AND			s.name = @Schema
 	AND			o.name = @TableName
 	ORDER BY	c.column_id
 
@@ -194,14 +203,16 @@ PRINT '	FROM		' + @TableName
 -- input parameters
 DECLARE MyCursor CURSOR LOCAL FAST_FORWARD
 FOR
-	SELECT		'Property' = c.name,
-				'SqlType' = t.name,
-				'Length' = c.max_length,
-				'Row' = ROW_NUMBER() OVER (ORDER BY c.column_id)
+	SELECT		Property = c.name,
+				SqlType = t.name,
+				Length = c.max_length,
+				Row = ROW_NUMBER() OVER (ORDER BY c.column_id)
 	FROM		sys.columns c
 	JOIN		sys.objects o ON c.object_id = o.object_id
 	JOIN		sys.types t ON c.user_type_id = t.user_type_id
+	JOIN		sys.schemas s ON o.schema_id = s.schema_id
 	WHERE		o.type = 'U'
+	AND			s.name = @Schema
 	AND			o.name = @TableName
 	AND			c.name = 
 					CASE

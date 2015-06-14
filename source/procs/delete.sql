@@ -15,8 +15,9 @@ DECLARE @PrimaryKey		VARCHAR(50)	= ''
 -- get primary key
 SELECT	TOP 1
 		@PrimaryKey = COLUMN_NAME
-FROM	information_schema.key_column_usage 
-WHERE	TABLE_NAME = @TableName
+FROM	INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE	TABLE_SCHEMA = @Schema
+AND		TABLE_NAME = @TableName
 
 PRINT 'CREATE PROCEDURE [' + @Schema +  '].[' + @ProcBaseName + '_Delete]'
 PRINT '('

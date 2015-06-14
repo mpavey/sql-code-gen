@@ -32,14 +32,15 @@ DECLARE @Fields TABLE
 -- otherwise we will just use all of the fields for the specified table as input parameters
 INSERT INTO @Fields
 	(Property, SqlType, [Null])
-	SELECT		'Property' = REPLACE(p.PARAMETER_NAME, '@', ''),
-				'SqlType' = p.DATA_TYPE,
-				'Null' = ISNULL(c.is_nullable, 0)
+	SELECT		Property = REPLACE(p.PARAMETER_NAME, '@', ''),
+				SqlType = p.DATA_TYPE,
+				[Null] = ISNULL(c.is_nullable, 0)
 	FROM		INFORMATION_SCHEMA.PARAMETERS p
 	JOIN		sys.objects o ON o.type = 'U' AND o.name = @TableName
+	JOIN		sys.schemas s ON o.schema_id = s.schema_id AND s.name = @Schema
 	LEFT JOIN	sys.columns c ON o.object_id = c.object_id AND REPLACE(p.PARAMETER_NAME, '@', '') = c.name
-	LEFT JOIN	sys.types t ON c.user_type_id = t.user_type_id
-	WHERE		p.SPECIFIC_NAME = @StoredProcedure
+	WHERE		p.SPECIFIC_SCHEMA = @Schema
+	AND			p.SPECIFIC_NAME = @StoredProcedure
 	AND			p.PARAMETER_MODE = 'IN'
 	ORDER BY	p.ORDINAL_POSITION
 
@@ -47,13 +48,15 @@ IF NOT EXISTS(SELECT Property FROM @Fields)
 BEGIN
 	INSERT INTO @Fields
 		(Property, SqlType, [Null])
-		SELECT		'Property' = c.name,
-					'SqlType' = t.name,
-					'Null' = c.is_nullable
+		SELECT		Property = c.name,
+					SqlType = t.name,
+					[Null] = c.is_nullable
 		FROM		sys.columns c
 		JOIN		sys.objects o ON c.object_id = o.object_id
 		JOIN		sys.types t ON c.user_type_id = t.user_type_id
+		JOIN		sys.schemas s ON o.schema_id = s.schema_id
 		WHERE		o.type = 'U'
+		AND			s.name = @Schema
 		AND			o.name = @TableName
 		ORDER BY	c.column_id
 END
