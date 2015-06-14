@@ -51,7 +51,7 @@ OPTIONAL SETTINGS
 
 -- the namespace of the project
 -- Recommended: This value should be set specific to your project
-:setvar Namespace "MySafeInfo"
+:setvar Namespace "Sandbox"
 
 -- the name of the base class for the model class
 -- Recommended: This value is only required if your model classes derive from a base class
@@ -67,7 +67,7 @@ OPTIONAL SETTINGS
 
 -- the version of the enterprise library data access application blocks
 -- Recommended: 5 (default) or 6, this simply determines how the Database DB variable is initialized
-:setvar EnterpriseLibrary "6"
+:setvar EnterpriseLibrary "5"
 
 /*
 --------------------------------------------------
