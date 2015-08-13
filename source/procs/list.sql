@@ -25,11 +25,17 @@ DECLARE @PrimaryKey		VARCHAR(50)	= ''
 DECLARE @DefaultValue	VARCHAR(50)	= ''
 
 -- get primary key
-SELECT	TOP 1
-		@PrimaryKey = COLUMN_NAME
-FROM	INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
-WHERE	TABLE_SCHEMA = @Schema
-AND		TABLE_NAME = @TableName
+SELECT		TOP 1
+			@PrimaryKey = c.name
+FROM		sys.columns c
+JOIN		sys.tables t ON c.object_id = t.object_id
+JOIN		sys.schemas s ON t.schema_id = s.schema_id
+JOIN		sys.types x ON c.user_type_id = x.user_type_id
+JOIN		INFORMATION_SCHEMA.COLUMNS i ON i.TABLE_SCHEMA = s.name AND i.TABLE_NAME = t.name AND i.COLUMN_NAME = c.name
+WHERE		s.name = @Schema
+AND			t.name = @TableName
+AND			c.is_identity = 1
+ORDER BY	i.ORDINAL_POSITION
 
 -- number of columns
 SELECT	@Columns = COUNT(*)
