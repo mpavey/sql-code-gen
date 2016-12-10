@@ -2,18 +2,17 @@
 Imports System.Runtime.CompilerServices
 Imports System.ComponentModel
 Imports System.Text.RegularExpressions
+Imports System.Collections.Concurrent
 
 Public Module Extensions
-    Private typeDictionary As New Dictionary(Of Type, IList(Of PropertyInfo))()
+    Private typeDictionary As New ConcurrentDictionary(Of Type, IList(Of PropertyInfo))()
 
     Public Function GetPropertiesForType(Of T)() As IList(Of PropertyInfo)
         'variables
         Dim type = GetType(T)
 
-        'get types
-        If Not typeDictionary.ContainsKey(GetType(T)) Then
-            typeDictionary.Add(type, type.GetProperties().ToList())
-        End If
+        'add to dictionary
+        typeDictionary.TryAdd(type, type.GetProperties().ToList())
 
         'return
         Return typeDictionary(type)

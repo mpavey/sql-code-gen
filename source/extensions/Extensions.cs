@@ -5,25 +5,23 @@ using System.Reflection;
 using System.Data;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using System.Collections.Concurrent;
 
 namespace Sandbox.Utilities
 {
     public static class Extensions
     {
-        private static Dictionary<Type, IList<PropertyInfo>> typeDictionary = new Dictionary<Type, IList<PropertyInfo>>();
+        private static ConcurrentDictionary<Type, IList<PropertyInfo>> typeDictionary = new ConcurrentDictionary<Type, IList<PropertyInfo>>();
 
         public static IList<PropertyInfo> GetPropertiesForType<T>()
         {
-            // variables
+            //variables
             var type = typeof(T);
 
-            // get types
-            if (!typeDictionary.ContainsKey(typeof(T)))
-            {
-                typeDictionary.Add(type, type.GetProperties().ToList());
-            }
+            //add to dictionary
+            typeDictionary.TryAdd(type, type.GetProperties().ToList());
 
-            // return
+            //return
             return typeDictionary[type];
         }
 
