@@ -203,7 +203,7 @@ CLOSE		MyCursor
 DEALLOCATE	MyCursor
 
 -- from
-PRINT '	FROM		' + @TableName
+PRINT '	FROM		' + @Schema + '.' + @TableName
 
 -- filters
 -- input parameters

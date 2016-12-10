@@ -110,7 +110,7 @@ PRINT ')'
 PRINT 'AS'
 PRINT 'BEGIN'
 PRINT '	-- check to see if record exists'
-PRINT '	IF EXISTS (SELECT ' + @PrimaryKey + ' FROM ' + @TableName + ' WHERE ' + @PrimaryKey + ' = @' + @PrimaryKey + ')'
+PRINT '	IF EXISTS (SELECT ' + @PrimaryKey + ' FROM ' + @Schema + '.' + @TableName + ' WHERE ' + @PrimaryKey + ' = @' + @PrimaryKey + ')'
 PRINT '	BEGIN'
 
 -- get total rows (minus primary key)
@@ -126,7 +126,7 @@ AND		c.name != @PrimaryKey
 
 -- UPDATE
 PRINT '		-- update'
-PRINT '		UPDATE	' + @TableName
+PRINT '		UPDATE	' + @Schema + '.' + @TableName
 
 DECLARE MyCursor CURSOR LOCAL FAST_FORWARD
 FOR
@@ -192,7 +192,7 @@ PRINT '	BEGIN'
 
 -- INSERT
 PRINT '		-- insert'
-PRINT '		INSERT INTO	' + @TableName
+PRINT '		INSERT INTO	' + @Schema + '.' + @TableName
 PRINT '			(' + @Fields + ')'
 PRINT '		VALUES'
 PRINT '			(' + @Values + ')'

@@ -67,24 +67,23 @@ BEGIN
 	-- .Net data type	
 	SET @DotNetType = 
 		CASE
-			WHEN @SqlType = 'bit' THEN 'bool'
+			WHEN @SqlType = 'bit' THEN 'Boolean'
 			WHEN @SqlType = 'date' THEN 'DateTime'
 			WHEN @SqlType = 'datetime' THEN 'DateTime'
-			WHEN @SqlType LIKE 'decimal%' THEN 'decimal'
-			WHEN @SqlType = 'int' THEN 'int'
-			WHEN @SqlType = 'money' THEN 'decimal'
+			WHEN @SqlType = 'decimal' THEN 'Decimal'
+			WHEN @SqlType = 'int' THEN 'Integer'
+			WHEN @SqlType = 'money' THEN 'Decimal'
 			WHEN @SqlType = 'smalldatetime' THEN 'DateTime'
-			WHEN @SqlType = 'smallint' THEN 'int'
-			WHEN @SqlType = 'tinyint' THEN 'int'
+			WHEN @SqlType = 'smallint' THEN 'Integer'
+			WHEN @SqlType = 'tinyint' THEN 'Integer'
 			WHEN @SqlType = 'time' THEN 'TimeSpan'
-			WHEN @SqlType = 'float' THEN 'double'
-			ELSE 'string'
+			ELSE 'String'
 		END
 	
 	-- default value based on data type
 	SET @DefaultValue = 
 		CASE
-			WHEN @SqlType = 'bit' THEN 'false'
+		WHEN @SqlType = 'bit' THEN 'False'
 			WHEN @SqlType = 'date' THEN 'DateTime.MinValue'
 			WHEN @SqlType = 'datetime' THEN 'DateTime.MinValue'
 			WHEN @SqlType = 'decimal' THEN '0'
@@ -93,7 +92,7 @@ BEGIN
 			WHEN @SqlType = 'smalldatetime' THEN 'DateTime.MinValue'
 			WHEN @SqlType = 'smallint' THEN '0'
 			WHEN @SqlType = 'tinyint' THEN '0'
-			ELSE 'string.Empty'
+			ELSE 'String.Empty'
 		END
 	
 	-- public properties

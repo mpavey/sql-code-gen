@@ -32,7 +32,7 @@ PRINT ')'
 PRINT 'AS'
 PRINT 'BEGIN'
 PRINT '	DELETE'
-PRINT '	FROM	' + @TableName
+PRINT '	FROM	' + @Schema + '.' + @TableName
 PRINT '	WHERE	' + @PrimaryKey + ' = @' + @PrimaryKey
 PRINT 'END'
 PRINT 'GO'
